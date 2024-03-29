@@ -3,7 +3,7 @@ from django.db import models
 
 
 # Create your models here.
-class Playlists(models.Model):
+class Playlist(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
