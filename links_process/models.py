@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+
+class LinksProcess(models.Model):
+    link_id = models.OneToOneField('links.Link', on_delete=models.CASCADE, related_name='link_process')
+    title = models.CharField(max_length=255)
+    views = models.IntegerField()
+    length = models.IntegerField()
+    channel = models.CharField(max_length=255)
+    channel_url = models.CharField(max_length=255)
+    video_id = models.CharField(max_length=255)
