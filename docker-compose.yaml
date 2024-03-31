@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: redblock_django_links
+      MYSQL_USER: redblock_django
+      MYSQL_PASSWORD: Senha@@2025
+    ports:
+      - "3306:3306"
+    volumes:
+      - django-links:/var/lib/mysql
+
+volumes:
+  django-links:
