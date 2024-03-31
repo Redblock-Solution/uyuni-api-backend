@@ -6,8 +6,7 @@ from playlists.models import Playlist
 class Link(models.Model):
     playlists_id = models.ForeignKey(Playlist, related_name='links', on_delete=models.CASCADE)
     url = models.CharField(max_length=255)
-    youtube_id = models.CharField(max_length=100)
-    links_process_status = models.BooleanField(False)
+    view_player = models.IntegerField(default=0)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 

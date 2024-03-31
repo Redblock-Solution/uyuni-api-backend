@@ -9,3 +9,7 @@ class LinksProcess(models.Model):
     channel = models.CharField(max_length=255)
     channel_url = models.CharField(max_length=255)
     video_id = models.CharField(max_length=255)
+    thumbnail_url = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.title
