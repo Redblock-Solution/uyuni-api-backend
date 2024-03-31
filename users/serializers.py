@@ -8,4 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True, 'min_length': 8}}
 
     def create(self, validated_data):
+        email = validated_data['email']
+        validated_data['username'] = email
         return User.objects.create_user(**validated_data)
