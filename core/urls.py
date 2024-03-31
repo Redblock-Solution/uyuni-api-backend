@@ -7,6 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from links_process.api.viewsets import LinksProcessViewSet
 from playlists.api.viewsets import PlaylistsViewSet
 from links.api.viewsets import LinkViewSet
+from rest_framework.authtoken import views
 
 router = routers.DefaultRouter()
 router.register(r'playlists', PlaylistsViewSet)
@@ -16,6 +17,7 @@ router.register(r'links-process', LinksProcessViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('login/', views.obtain_auth_token)
 ]
 
 
