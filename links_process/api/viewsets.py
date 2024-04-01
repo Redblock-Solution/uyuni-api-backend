@@ -9,3 +9,7 @@ class LinksProcessViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = LinksProcess.objects.all()
     serializer_class = LinkProcessSerializer
+
+    def get_queryset(self):
+        id = self.request.user.id
+        return LinksProcess.objects.filter(user_id=id)

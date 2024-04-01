@@ -18,12 +18,7 @@ class LinkViewSet(ModelViewSet):
 
     def get_queryset(self):
         id = self.request.user.id
-        validate_link = Playlist.objects.filter(user_id=id)
-        if validate_link == False:
-            return []
-        
-        return Link.objects.filter()
-
+        return Link.objects.filter(user_id=id)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
