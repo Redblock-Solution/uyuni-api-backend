@@ -15,4 +15,7 @@ class PlaylistsViewSet(ModelViewSet):
     def get_queryset(self):
         id = self.request.user.id
         return Playlist.objects.filter(user_id=id)
+
+
+
         

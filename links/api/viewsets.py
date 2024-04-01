@@ -20,10 +20,15 @@ class LinkViewSet(ModelViewSet):
         id = self.request.user.id
         return Link.objects.filter(user_id=id)
 
+    def perform_create(self, serializer):
+        id = self.request.user.id
+        serializer.save(user_id_id=id)
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         url = serializer.validated_data.get('url')
+        id = self.request.user.id
 
         try:
             yt = YouTube(url)
@@ -35,11 +40,13 @@ class LinkViewSet(ModelViewSet):
                 'channel': yt.author,
                 'channel_url': yt.channel_url,
                 'video_id': yt.video_id,
-                'thumbnail_url': yt.thumbnail_url
+                'thumbnail_url': yt.thumbnail_url,
+                'user_id_id': id
             }
 
             self.perform_create(serializer)
             link_instance = serializer.instance
+
             LinksProcess.objects.create(link_id=link_instance, **link_process_data)
 
             headers = self.get_success_headers(serializer.data)
