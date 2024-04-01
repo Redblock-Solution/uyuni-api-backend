@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 class LinksProcess(models.Model):
     link_id = models.OneToOneField('links.Link', on_delete=models.CASCADE, related_name='link_process')
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=255)
     views = models.IntegerField()
     length = models.IntegerField()
