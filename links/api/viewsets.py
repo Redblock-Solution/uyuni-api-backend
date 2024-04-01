@@ -1,15 +1,29 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+
 from pytube import YouTube
+
 from links.api.serializers import LinkSerializer
 from links.models import Link
 from links_process.models import LinksProcess
+from playlists.models import Playlist
 
 
 class LinkViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
+
+    def get_queryset(self):
+        id = self.request.user.id
+        validate_link = Playlist.objects.filter(user_id=id)
+        if validate_link == False:
+            return []
+        
+        return Link.objects.filter()
+
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
